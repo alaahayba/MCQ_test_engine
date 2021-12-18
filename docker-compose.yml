@@ -33,7 +33,7 @@ services:
       volumes:
         - /mongodb/database:/data/db
       ports:
-        - 27017:27017
+        - 27019:27017
       restart: unless-stopped
   app: 
     build: ./MCQ_server
@@ -46,13 +46,17 @@ services:
         - "3001:3000"
     depends_on:
         - db
+        - mongodb
     links:
         - db
+        - mongodb
     environment:
         DB_USER: user
         DB_NAME: app
         DB_PASSWORD: password
         DB_HOST: db
+        MONGO_HOST: mongodb
+
 
 networks:
   rabbitmq_sever:
