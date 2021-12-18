@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'admin/students/results', to: "student#get_scores"
   post 'admin/students/results/average', to: "student#student_average"
   post 'admin/topics/results/average', to: "topics#topic_average"
-  post 'admin/topics/highes/scores', to: "student#highest_score"
+  post 'admin/topics/results/scores', to: "topics#highest_score"
 
   get 'student/index'
   post 'student/exam/enroll' , to: "student#enroll" , constraints: { format: "json" }

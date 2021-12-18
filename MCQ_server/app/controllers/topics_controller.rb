@@ -43,6 +43,14 @@ class TopicsController < ApplicationController
     @average=StudentEnroll.where(topic_name: params[:topic_name]).average("score")
     render json: { result:@average }, status: 200
   end
+
+  def highest_score
+    @highest_result = StudentEnroll
+      .where(topic_name: params[:topic_name])
+      .order("score DESC").limit(5)
+    render json: { result:@highest_result }, status: 200
+  end 
+
   private
 
   def topics_exam_params
