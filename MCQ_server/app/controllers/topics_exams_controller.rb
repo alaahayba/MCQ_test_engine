@@ -9,38 +9,6 @@ class TopicsExamsController < ApplicationController
 
   end
 
-  # GET /topics_exams/new
-  def new
-    @topics_exam = TopicsExam.new
-  end
-
-  # GET /topics_exams/1/edit
-  def edit
-  end
-
-
-  # PATCH/PUT /topics_exams/1 or /topics_exams/1.json
-  def update
-    respond_to do |format|
-      if @topics_exam.update(topics_exam_params)
-        format.html { redirect_to @topics_exam, notice: "Topics exam was successfully updated." }
-        format.json { render :show, status: :ok, location: @topics_exam }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @topics_exam.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /topics_exams/1 or /topics_exams/1.json
-  def destroy
-    @topics_exam.destroy
-    respond_to do |format|
-      format.html { redirect_to topics_exams_url, notice: "Topics exam was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_topics_exam

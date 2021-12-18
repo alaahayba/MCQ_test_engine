@@ -16,9 +16,12 @@ class StudentController < ApplicationController
       return
     end
     ## save enrolled topic
-    puts ":enroll studet"
+    puts ":enroll studet";
+    exam=topic_data[:exam][0]
     examEnrollData = { "phone" => params[:student][:phone],
-    "topic_name" => "IQ","topic_id" => "1111111"};
+    "topic_name" => topic_data[:exam][0][:topic_name],
+    "topic_id" => topic_data[:exam][0][:id]};
+
     @enroll_result=studen_exam_enroll(examEnrollData);
     puts "enroll_result:";
     puts @enroll_result;
@@ -27,8 +30,7 @@ class StudentController < ApplicationController
       return
     end
      ### shuffle exam 
-    exam=topic_data[:exam]
-    #shuffled_exam=helpers.shuffle_exam(exam)
+    shuffled_exam=helpers.shuffle_exam(exam)
     puts "topic_data:>>",topic_data
 
     render json: { status:"enrolled" ,"topic": topic_name, "exam": exam }, status: 200
