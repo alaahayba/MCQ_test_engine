@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   post 'admin/topic/create', to: "topics#topic_create" , constraints: { format: "json" }
   post 'admin/topic/edit', to: "topics#topic_edit" , constraints: { format: "json" }
 
-  post 'admin/students/results', to: "topics#edit"
-  post 'admin/students/results/average', to: "topics#edit"
-  post 'admin/topics/results/average', to: "topics#edit"
-  post 'admin/topics/highes/scores', to: "topics#edit"
+  post 'admin/students/results', to: "student#get_scores"
+  post 'admin/students/results/average', to: "student#student_average"
+  post 'admin/topics/results/average', to: "topics#topic_average"
+  post 'admin/topics/highes/scores', to: "student#highest_score"
 
   get 'student/index'
   post 'student/exam/enroll' , to: "student#enroll" , constraints: { format: "json" }

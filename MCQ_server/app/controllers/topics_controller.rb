@@ -39,6 +39,10 @@ class TopicsController < ApplicationController
 
   end
 
+  def topic_average
+    @average=StudentEnroll.where(topic_name: params[:topic_name]).average("score")
+    render json: { result:@average }, status: 200
+  end
   private
 
   def topics_exam_params

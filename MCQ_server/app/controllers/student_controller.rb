@@ -1,8 +1,9 @@
 class StudentController < ApplicationController
   before_action :validate_enroll_body, only: [:enroll]
+  before_action :filter_params, only: [:get_studen_result]
 
-  def enroll
   
+  def enroll
     ## TODO save user data
     puts ":save studet"
     @save_result=save_student;
@@ -36,7 +37,6 @@ class StudentController < ApplicationController
     render json: { status:"enrolled" ,"topic": topic_name, "exam": exam }, status: 200
   end
 
-
   def submit
     topic="IQ"
     exam=[1,2,3]
@@ -44,9 +44,37 @@ class StudentController < ApplicationController
     render json: { "topic": topic, status: "submit" }, status: 200
   end
 
+  def get_scores
+    puts "get_scores"
+    filter =[], values=[]  
+    permit_filter=["topic_name","phone"]
+    # for key in permit_filter do
+    #   if(params[:topic_name])
+    #      filter.push key
+    # end
+
+    puts filter 
+    puts "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+
+    puts params.values
+    puts "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+    # if(params[:topic_name])
+    # filter=["topic_name = ?", "#{params[:topic_name]}"]
+    # end
+    # if(params[:phone])
+    #   filter=["phone = ?", "#{params[:phone]}"]
+    # end
+    puts params[:filter]
+    @scores = StudentEnroll.where(filter)
+    render json: { result:@scores }, status: 200
+  end
+  
+  def student_average
+    @average=StudentEnroll.where(phone: params[:phone]).average("score")
+    render json: { result:@average }, status: 200
+  end
+
   private
-
-
   def validate_enroll_body
     # strong parameters
     params.require(:student).permit(:name,:age, :phone)
@@ -81,6 +109,12 @@ class StudentController < ApplicationController
   # Only allow a trusted parameter .
   def student_params
       params.require(:student).permit(:name,:age, :phone)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:topic_name, :phone )
+    params[:filter].permit!
+    ActionController::Parameters.permit_all_parameters = true
   end
 
 end
