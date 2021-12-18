@@ -29,6 +29,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'mongoid', '~> 6.0'
 gem 'bson_ext'
+gem 'json', '~> 2.6', '>= 2.6.1'
 # gem 'rails_param'
 
 # Use Redis adapter to run Action Cable in production

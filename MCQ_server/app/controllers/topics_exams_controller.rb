@@ -1,5 +1,5 @@
 class TopicsExamsController < ApplicationController
-  before_action :set_topics_exam, only: %i[ show edit update destroy ]
+  before_action :topics_exam_params, only: [:create]
 
   # GET /topics_exams or /topics_exams.json
   def index
@@ -18,20 +18,6 @@ class TopicsExamsController < ApplicationController
   def edit
   end
 
-  # POST /topics_exams or /topics_exams.json
-  def create
-    @topics_exam = TopicsExam.new(topics_exam_params)
-
-    respond_to do |format|
-      if @topics_exam.save
-        format.html { redirect_to @topics_exam, notice: "Topics exam was successfully created." }
-        format.json { render :show, status: :created, location: @topics_exam }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @topics_exam.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PATCH/PUT /topics_exams/1 or /topics_exams/1.json
   def update

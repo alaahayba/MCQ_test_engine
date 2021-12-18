@@ -28,10 +28,10 @@ class StudentController < ApplicationController
     end
      ### shuffle exam 
     exam=topic_data[:exam]
-    shuffled_exam=helpers.shuffle_exam(exam)
+    #shuffled_exam=helpers.shuffle_exam(exam)
     puts "topic_data:>>",topic_data
 
-    render json: { status:"enrolled" ,"topic": topic_name, "exam": shuffled_exam }, status: 200
+    render json: { status:"enrolled" ,"topic": topic_name, "exam": exam }, status: 200
   end
 
 

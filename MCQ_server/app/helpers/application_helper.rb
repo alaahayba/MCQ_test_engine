@@ -1,14 +1,16 @@
 
 module ApplicationHelper
     def get_topic(topic_name)
-        if topic_name == "IQ"
-          return {exam:[1,2,3]}
-        else
+      @topics_exam = TopicsExam.where("topic_name":topic_name).only(:topic_name,:questions);
+      if @topics_exam.length.to_i != 0
+        return {exam:@topics_exam}
+      else
           {error:"topic not exist"}
-        end
+      end
     end
 
     def shuffle_exam(exam)
+      @questions = exam[:questions]
         puts "shuffle questitons";
         puts "shuffle answers"
         return exam

@@ -2,5 +2,5 @@ class TopicsExam
   include Mongoid::Document
   field :topic_name, type: String
   field :questions, type: Array
-  field :answers, type: Object
+  field :answers, type: Hash
 end
