@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   post 'admin/topic/create', to: "topics#topic_create" , constraints: { format: "json" }
   post 'admin/topic/edit', to: "topics#topic_edit" , constraints: { format: "json" }
 
-  post 'admin/topic/edit', to: "topics#edit" , constraints: { format: "json" }
   post 'admin/students/results', to: "topics#edit"
   post 'admin/students/results/average', to: "topics#edit"
   post 'admin/topics/results/average', to: "topics#edit"
