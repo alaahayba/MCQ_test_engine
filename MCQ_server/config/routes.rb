@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :topics_exams
   get 'topics/index'
   get 'admin/topics/view', to: "topics#all" , constraints: { format: "json" }
   get '/patients/:id', to: 'patients#show' , constraints: { format: "json" }

@@ -1,0 +1,41 @@
+{
+    "id": 1,
+    "topic_name": "IQ",
+    "questions": [
+        {
+            "id": 1,
+            "questiton": "what is nex [2,4,8,..]",
+            "choices": [
+                12,
+                20,
+                13,
+                16
+            ]
+        },
+        {
+            "id": 2,
+            "questiton": "select not simialr",
+            "choices": [
+                12,
+                20,
+                13,
+                16
+            ]
+        },
+        {
+            "id": 3,
+            "questiton": "cat is animal car is ",
+            "choices": [
+                "bus",
+                "animal",
+                "object",
+                "vichel"
+            ]
+        }
+    ],
+    "answers": {
+        "1": "16",
+        "2": "13",
+        "3": "vichel"
+    }
+}

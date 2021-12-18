@@ -1,3 +1,4 @@
+
 module ApplicationHelper
     def get_topic(topic_name)
         if topic_name == "IQ"
