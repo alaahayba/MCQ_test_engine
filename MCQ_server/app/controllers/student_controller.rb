@@ -1,6 +1,7 @@
 class StudentController < ApplicationController
   before_action :validate_enroll_body, only: [:enroll]
   before_action :filter_params, only: [:get_scores]
+  before_action :validate_submit_body, only: [:submit]
 
   def enroll
     ## TODO save user data
@@ -33,17 +34,48 @@ class StudentController < ApplicationController
     shuffled_exam = helpers.shuffle_exam(exam)
     puts "topic_data:>>", topic_data
 
-    render json: { status: "enrolled", "topic": topic_name, "exam": exam }, status: 200
+    render json: { status: "enrolled",
+                   "enroll_id": @enroll_result[:userEnroll][:id],
+                   "topic": topic_name, "exam": exam }, status: 200
   end
 
   def submit
-    topic = "IQ"
-    exam = [1, 2, 3]
-    #validat answers is true or false
-    # save answers
-    # push answer
+    phone = params[:phone]
+    enroll_id = params[:enroll_id]
+    topic_name = params[:topic]
 
-    render json: { "topic": topic, status: "submit" }, status: 200
+    #check if user is enrolled
+    @is_student_enrolled = StudentEnroll
+      .where(id: enroll_id,
+             phone: phone, topic_name: topic_name)
+
+    puts "enrolled result", @is_student_enrolled
+    if @is_student_enrolled.length.to_i == 0
+      render json: { status: "error", message: "no enrollment found" }, status: 404
+      return
+    end
+
+    ##### TODO prevent multiple submit
+
+    #Mongo get topic
+    topic_answers = helpers.get_topic_answers(topic_name)
+    puts "topic_answers:>>"
+    puts topic_answers[:exam][0][:answers]
+
+    if (topic_answers[:error])
+      render json: { error: "cannot find topic", status: "systemError" }, status: 404
+      return
+    end
+    # save answers
+    # @save_answers_result = save_answers_student
+    #validat answers is true or false
+    users_answers = params[:answers]
+    topic_answers=topic_answers[:exam][0][:answers]
+    answers_validations = helpers.validate_answers( topic_answers, users_answers)
+    puts answers_validations
+    # push answer answers_validations to RMQ
+
+    render json: { "topic": topic_name, status: "submit" }, status: 200
   end
 
   def get_scores
@@ -67,6 +99,15 @@ class StudentController < ApplicationController
     params.require(:topic)
   end
 
+  def validate_submit_body
+    # strong parameters
+    params.require (:phone)
+    params.require(:enroll_id)
+    params.require (:answers)
+    params.require(:topic)
+
+  end
+
   def save_student
     @student_phone = Student.where(phone: student_params[:phone])
     if @student_phone == []
@@ -84,7 +125,7 @@ class StudentController < ApplicationController
   def studen_exam_enroll(examEnrollData)
     @student_enroll = StudentEnroll.new(examEnrollData)
     if @student_enroll.save
-      return { status: true }
+      return { status: true, userEnroll: @student_enroll }
     else
       puts "::::::::::::Error::::::::::::"
       puts @student_enroll
