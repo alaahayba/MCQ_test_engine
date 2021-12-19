@@ -46,11 +46,10 @@ class StudentController < ApplicationController
 
     #check if user is enrolled
     @is_student_enrolled = StudentEnroll
-      .where(id: enroll_id,
-             phone: phone, topic_name: topic_name)
+      .where(id: enroll_id, phone: phone, topic_name: topic_name)
 
     puts "enrolled result", @is_student_enrolled
-    if @is_student_enrolled.length.to_i == 0
+    if @is_student_enrolled.length == 0
       render json: { status: "error", message: "no enrollment found" }, status: 404
       return
     end
@@ -70,10 +69,17 @@ class StudentController < ApplicationController
     # @save_answers_result = save_answers_student
     #validat answers is true or false
     users_answers = params[:answers]
-    topic_answers=topic_answers[:exam][0][:answers]
-    answers_validations = helpers.validate_answers( topic_answers, users_answers)
+    topic_answers = topic_answers[:exam][0][:answers]
+    answers_validations = helpers.validate_answers(topic_answers, users_answers)
     puts answers_validations
     # push answer answers_validations to RMQ
+    user_answers_data = {
+      answers_validations: answers_validations,
+      topic_name: topic_name,
+      enroll_id: enroll_id,
+      phone: phone,
+    }
+    # helpers.publish_answer("answers", user_answers_data)
 
     render json: { "topic": topic_name, status: "submit" }, status: 200
   end
@@ -105,7 +111,6 @@ class StudentController < ApplicationController
     params.require(:enroll_id)
     params.require (:answers)
     params.require(:topic)
-
   end
 
   def save_student

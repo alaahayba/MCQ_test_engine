@@ -6,7 +6,7 @@ module TopicsHelper
         puts examData["topic_name"]
         begin
             @exam = TopicsExam.where("topic_name":examData["topic_name"])
-            if @exam.length.to_i == 0
+            if @exam.length == 0
                 puts "error: not found"
                 return {error:"not found"}
             end

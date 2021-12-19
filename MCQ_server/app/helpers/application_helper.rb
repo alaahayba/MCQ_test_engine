@@ -3,7 +3,7 @@ module ApplicationHelper
     @topics_exam = TopicsExam
       .where("topic_name": topic_name)
       .only(:topic_name, :questions)
-    if @topics_exam.length.to_i != 0
+    if @topics_exam.length != 0
       return { exam: @topics_exam }
     else
       { error: "topic not exist" }
@@ -14,7 +14,7 @@ module ApplicationHelper
     @topics_exam = TopicsExam
       .where("topic_name": topic_name)
       .only(:topic_name, :answers)
-    if @topics_exam.length.to_i != 0
+    if @topics_exam.length != 0
       return { exam: @topics_exam }
     else
       { error: "topic not exist" }
@@ -67,7 +67,23 @@ module ApplicationHelper
       end
     end
 
-    puts "answes_results",answes_results
+    puts "answes_results", answes_results
     return answes_results
+  end
+
+  def publish_answer(queue, answers)
+    puts user_answers_data
+    connection = Bunny.new
+    connection.start
+    channel = connection.create_channel
+    queue = channel.queue("hello")
+    channel.default_exchange.publish(queue, routing_key: queue.name)
+    puts " [x] Sent 'Hello World!'"
+    connection.close
+  end
+
+  def pulish_answers(topic_answers, answers)
+    Publisher.publish(topic_answers, answers)
+
   end
 end
