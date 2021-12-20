@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require "bunny"
 require "json"
-
+require  "./save_score"
 def calculate_score(answers)
   puts "start calculate score for answers:", answers
   score = 0
@@ -21,8 +21,9 @@ def save_score(user_data, score)
 end
 
 def start
-  connection = Bunny.new(automatically_recover: false)
-  # Bunny.new(host: ENV["RMQ_HOST"])
+  puts "RMQ host>>>", ENV["RMQ_HOST"]
+  connection = Bunny.new(host: ENV["RMQ_HOST"],
+                         automatically_recover: false)
   connection.start
   queue_name = ENV["QUEUE_NAME"] || "student_answers"
   puts queue_name

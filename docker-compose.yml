@@ -5,7 +5,7 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
-        - 5672:5672
+        - 5673:5672
         - 15672:15672
     volumes:
         - ./rabbitmq/data/:/var/lib/rabbitmq/
@@ -38,13 +38,13 @@ services:
         - 27019:27017
       restart: unless-stopped
 
-  app: 
+  mcq_server: 
     build: ./MCQ_server
     container_name: MCQ_server
     
     command:  bundle exec rails s -p 3000 -b '0.0.0.0'
     # rails tmp:cache:clear
-    # bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes: 
         - "./MCQ_server:/app"
     ports: 
@@ -64,6 +64,30 @@ services:
         DB_HOST: db
         MONGO_HOST: mongodb
         RMQ_HOST: rabbitmq
+
+  scoring_service: 
+    build: ./scoring_service
+    container_name: scoring_service
+
+    command: ruby calculate_score.rb
+   
+    volumes: 
+        - "./scoring_service:/app"
+
+    depends_on:
+        - db
+        - rabbitmq
+    links:
+        - db
+        - rabbitmq
+
+    environment:
+        DB_USER: user
+        DB_NAME: app
+        DB_PASSWORD: password
+        DB_HOST: db
+        RMQ_HOST: rabbitmq
+
 
 
 # networks:
