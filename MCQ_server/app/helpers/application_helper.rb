@@ -71,19 +71,24 @@ module ApplicationHelper
     return answes_results
   end
 
-  def publish_answer(queue, answers)
-    puts user_answers_data
-    connection = Bunny.new
+  def publish_answer(queue_name, answers)
+    puts "publish answes"
+    puts answers, answers
+    puts " ENV['RMQ_HOST']", ENV["RMQ_HOST"]
+    connection =
+      Bunny.new(host: ENV["RMQ_HOST"],
+                port: "5672", vhost: "/", user: "guest", pass: "guest")
+    #  Bunny.new(hostname: ENV['RMQ_HOST'] )
+    # connection = Bunny.new
     connection.start
     channel = connection.create_channel
-    queue = channel.queue("hello")
-    channel.default_exchange.publish(queue, routing_key: queue.name)
-    puts " [x] Sent 'Hello World!'"
+    queue = channel.queue(queue_name)
+    channel.default_exchange.publish(answers.to_json, routing_key: queue.name)
+    puts " [x] Sent answers"
     connection.close
   end
 
   def pulish_answers(topic_answers, answers)
     Publisher.publish(topic_answers, answers)
-
   end
 end

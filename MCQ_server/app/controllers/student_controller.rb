@@ -79,7 +79,7 @@ class StudentController < ApplicationController
       enroll_id: enroll_id,
       phone: phone,
     }
-    # helpers.publish_answer("answers", user_answers_data)
+    helpers.publish_answer("student_answers", user_answers_data)
 
     render json: { "topic": topic_name, status: "submit" }, status: 200
   end
