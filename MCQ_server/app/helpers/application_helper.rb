@@ -71,13 +71,12 @@ module ApplicationHelper
     return answes_results
   end
 
-  def publish_answer(queue_name, answers)
-    puts "publish answes"
+  def publish_answer_V0(queue_name, answers)
+    puts "publish answers"
     puts answers, answers
     puts " ENV['RMQ_HOST']", ENV["RMQ_HOST"]
     connection =
-      Bunny.new(host: ENV["RMQ_HOST"],
-                port: "5672", vhost: "/", user: "guest", pass: "guest")
+      Bunny.new(host: ENV["RMQ_HOST"])
     #  Bunny.new(hostname: ENV['RMQ_HOST'] )
     # connection = Bunny.new
     connection.start
@@ -88,7 +87,7 @@ module ApplicationHelper
     connection.close
   end
 
-  def pulish_answers(topic_answers, answers)
+  def publish_answer(topic_answers, answers)
     Publisher.publish(topic_answers, answers)
   end
 end
