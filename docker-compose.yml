@@ -20,7 +20,7 @@ services:
       restart: always
       environment:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: app
+          MYSQL_DATABASE: MCQ_DB
           MYSQL_USER: user
           MYSQL_PASSWORD: password
       ports:
@@ -59,7 +59,7 @@ services:
         - rabbitmq
     environment:
         DB_USER: user
-        DB_NAME: app
+        DB_NAME: MCQ_DB
         DB_PASSWORD: password
         DB_HOST: db
         MONGO_HOST: mongodb
@@ -81,7 +81,7 @@ services:
 
     environment:
         DB_USER: user
-        DB_NAME: app
+        DB_NAME: MCQ_DB
         DB_PASSWORD: password
         DB_HOST: db
         RMQ_HOST: rabbitmq

@@ -1,7 +1,7 @@
-Drop SCHEMA `app`;
-CREATE SCHEMA `app` ;
+DROP DATABASE IF EXISTS `MCQ_DB`;
+CREATE SCHEMA `MCQ_DB` ;
 
-CREATE TABLE `app`.`students` (
+CREATE TABLE `MCQ_DB`.`students` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(11) NOT NULL,
   `age` FLOAT NOT NULL DEFAULT 0.0,
@@ -11,7 +11,7 @@ CREATE TABLE `app`.`students` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) );
 
-CREATE TABLE `app`.`student_enrolls` (
+CREATE TABLE `MCQ_DB`.`student_enrolls` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `phone` VARCHAR(11) NOT NULL,
   `topic_name` VARCHAR(11) NOT NULL,
