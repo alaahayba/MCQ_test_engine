@@ -1,6 +1,6 @@
 # MCQ test engine
 
-[MCQ_engine.com](https://github.com/alaahayba/zyda/)
+[MCQ_engine.com](https://github.com/alaahayba/MC!_test_engine/)
 
 ### postman collection
 [MCQ_postman](https://www.getpostman.com/collections/0b5ea09312ec7587dce7)
