@@ -54,14 +54,14 @@ If not, install the right ruby version using command (it could take a while):
 ```shell
 https://www.ruby-lang.org/en/documentation/installation/#apt
 ```
-**Install dependencies
+- Install dependencies
 
 Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.com/yarnpkg/yarn):
 
 ```shell
 bundle && yarn
 ```
-**Initialize the database
+- Initialize the database
   - initialize DB is in initDB
   - user:DBuser ,password:DBpassword ,app :DBname\
   for ex
@@ -69,12 +69,10 @@ bundle && yarn
 ```shell
   ./initDB/init.sh 127.0.0.1 3307 user password app
 ```
-
-## start app  
-### start one by one
-- move to start folder
-- change environment variable for each service
-- then start
+- start app one by one
+  - move to start folder
+  - change environment variable for each service
+  - then start
 
 ```shell
 cd start
