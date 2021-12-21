@@ -18,7 +18,7 @@ if [ "$RESULT" == "$5" ]; then
     echo -e "${Purple} \e[1m ****Database exist.Drop DB first Done****"
 fi
 echo -e "${Purple} \e[1m Database does not exist ::>> ${lightGray} start creating DB ..."
-mysql --protocol=TCP -h $1 -P $2 -u$3 -p$4 < ./initDB/init.sql
+mysql --protocol=TCP -h $1 -P $2 -u$3 -p$4 < ./init.sql
 echo -e "${Purple} DONE ... "
 
 

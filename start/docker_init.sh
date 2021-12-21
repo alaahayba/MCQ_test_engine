@@ -12,7 +12,8 @@ echo "  ${NC}👉 ${Green} create director rabbitmq${lightGray}"
 
 mkdir -p ../rabbitmq/data
 mkdir -p ../rabbitmq/log
-chmod -R 777 ../rabbitmq
+chmod -R 777 ../rabbitmq/data
+chmod -R 777 ../rabbitmq/log
 
 echo "${NC}👉 ${Green} build Docker compose ${lightGray}"
 cd ..

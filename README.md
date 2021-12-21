@@ -75,3 +75,9 @@ cd start
 cd start
 ./docker_init.sh
 ```
+at another terminal
+
+```
+ cd initDB
+ ./start.sh 
+```
