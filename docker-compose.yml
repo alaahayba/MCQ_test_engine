@@ -5,7 +5,7 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
-        - 5673:5672
+        - 5672:5672
         - 15672:15672
     volumes:
         - ./rabbitmq/data/:/var/lib/rabbitmq/
@@ -68,15 +68,13 @@ services:
   scoring_service: 
     build: ./scoring_service
     container_name: scoring_service
-
-    command: ruby calculate_score.rb
-   
+    restart: always
     volumes: 
         - "./scoring_service:/app"
-
     depends_on:
         - db
         - rabbitmq
+        - mcq_server
     links:
         - db
         - rabbitmq
