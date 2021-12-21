@@ -33,17 +33,29 @@ Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.co
 bundle && yarn
 ```
 
-### project structure
+### Project services dependencies
 
+ - [mysql](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04)
+ - [mongo](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+ - [rabbitMQ](https://www.rabbitmq.com/download.html)
+ 
+### Project structure
+ - initDB
+ - MCQ_server
+ - scorig_server
+ - docker-compose.yml
 
 
 ### Initialize the database
-
+  - initialize DB is in initDB
+  - user:DBuser ,password:DBpassword ,app :DBname
+ for ex
+ 
 ```shell
-./initDB/init.sh 127.0.0.1 3307 user password app
+  ./initDB/init.sh 127.0.0.1 3307 user password app
 ```
 
-## Serve
+## start app  
 
 ```shell
 rails s
