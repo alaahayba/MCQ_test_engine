@@ -34,6 +34,7 @@ cd start
 ```
 at another terminal
 - check mysql  is exist then init DB 
+- or run .sql file on sql workbench
 ```
  cd initDB
  ./start.sh 
