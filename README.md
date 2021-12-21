@@ -28,7 +28,7 @@ at another terminal
 ```
 
 
-### manual start each service
+### 2- manual start each service
 - Check your Ruby version
 
 ```shell
