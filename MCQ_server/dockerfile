@@ -7,6 +7,7 @@ ADD Gemfile.lock /app/Gemfile.lock
 ENV BUNDLER_VERSION=2.1.4
 RUN gem update --system && \
     gem install bundler:2.1.4 && \
-    bundle install
-    
+    bundle install&&\
+    ./initDB/init.sh 127.0.0.1 3307 user password MCQ_DB
+
 ADD . /app

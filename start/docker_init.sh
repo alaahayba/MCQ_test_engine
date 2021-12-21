@@ -18,6 +18,6 @@ echo "${NC}👉 ${Green} build Docker compose ${lightGray}"
 cd ..
 
 docker-compose build
-docker-compose up &
-chmod -R 777 ./initDB
-./initDB/init.sh 127.0.0.1 3307 user password MCQ_DB
+docker-compose up 
+# chmod -R 777 ./initDB
+# ./initDB/init.sh 127.0.0.1 3307 user password MCQ_DB
