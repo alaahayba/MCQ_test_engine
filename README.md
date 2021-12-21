@@ -33,7 +33,7 @@ cd start
 ./docker_init.sh
 ```
 at another terminal
-
+- check mysql  is exist then init DB 
 ```
  cd initDB
  ./start.sh 
