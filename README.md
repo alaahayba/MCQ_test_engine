@@ -14,7 +14,7 @@ cd MCQ_test_engine
 
 ```
 
-### start docker
+### 1- start docker
 - [installDocker](https://docs.docker.com/engine/install/)
 ```shell
 cd start
@@ -27,7 +27,9 @@ at another terminal
  ./start.sh 
 ```
 
-### Check your Ruby version
+
+### manual start each service
+- Check your Ruby version
 
 ```shell
 ruby -v
