@@ -9,5 +9,6 @@ RUN gem update --system && \
     gem install json && \
     gem install mysql2 
  
-    
 ADD . /app
+CMD ["ruby" , "calculate_score.rb"]
+

@@ -22,14 +22,13 @@ end
 
 def start
   puts "RMQ host>>>", ENV["RMQ_HOST"]
-  connection = Bunny.new(host: ENV["RMQ_HOST"],
-                         automatically_recover: false)
+  connection = Bunny.new(host: ENV["RMQ_HOST"])
   connection.start
   queue_name = ENV["QUEUE_NAME"] || "student_answers"
   puts queue_name
   channel = connection.create_channel
   queue = channel.queue(queue_name)
-
+  puts "start :"
   begin
     puts " [*] Waiting for messages. To exit press CTRL+C"
     queue.subscribe(manual_ack: true, block: true) do |_delivery_info, _properties, body|
@@ -37,7 +36,8 @@ def start
       body = JSON.parse(body)
       result = calculate_score(body["answers_validations"])
       puts "calculated Result", result
-      #   channel.ack(delivery_info.delivery_tag);
+      update_score(body["enroll_id"], body["phone"], result)
+      channel.ack(_delivery_info.delivery_tag);
 
     end
   rescue Interrupt => _
@@ -48,4 +48,8 @@ def start
 end
 
 puts "start consuming"
+puts "after sleep"
 start
+
+
+
