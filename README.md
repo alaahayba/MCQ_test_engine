@@ -10,7 +10,8 @@
 
 ```shell
 git clone https://github.com/alaahayba/zyda.git
-cd project
+cd zyda
+
 ```
 
 ### Check your Ruby version
