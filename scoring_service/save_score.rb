@@ -1,8 +1,8 @@
 require "mysql2"
 @db_host = ENV["DB_HOST"] || "localhost"
 @db_user = ENV["DB_USER"] || "user"
-@db_pass = ENV["DB_PASS"] || "password"
-@db_name = ENV["DB_APP"] || "app"
+@db_pass = ENV["DB_PASSWORD"] || "password"
+@db_name = ENV["DB_NAME"] || "app"
 
 @conn = Mysql2::Client.new(:host => @db_host, :username => @db_user,
                           :password => @db_pass, :database => @db_name)
