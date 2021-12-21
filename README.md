@@ -11,8 +11,20 @@
 ```shell
 git clone https://github.com/alaahayba/MCQ_test_engine.git
 cd MCQ_test_engine
-
 ```
+
+### Project services dependencies
+
+ - [mysql](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04)
+ - [mongo](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+ - [rabbitMQ](https://www.rabbitmq.com/download.html)
+ 
+### Project structure
+ - initDB
+ - MCQ_server
+ - scorig_server
+ - docker-compose.yml
+
 
 ### 1- start docker
 - [installDocker](https://docs.docker.com/engine/install/)
@@ -42,29 +54,14 @@ If not, install the right ruby version using command (it could take a while):
 ```shell
 https://www.ruby-lang.org/en/documentation/installation/#apt
 ```
-
-### Install dependencies
+**Install dependencies
 
 Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.com/yarnpkg/yarn):
 
 ```shell
 bundle && yarn
 ```
-
-### Project services dependencies
-
- - [mysql](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04)
- - [mongo](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
- - [rabbitMQ](https://www.rabbitmq.com/download.html)
- 
-### Project structure
- - initDB
- - MCQ_server
- - scorig_server
- - docker-compose.yml
-
-
-### Initialize the database
+**Initialize the database
   - initialize DB is in initDB
   - user:DBuser ,password:DBpassword ,app :DBname\
   for ex
@@ -84,3 +81,4 @@ cd start
 ./MCQ_server.sh
 ./scoring_service.sh
 ```
+
