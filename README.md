@@ -48,15 +48,28 @@ bundle && yarn
 
 ### Initialize the database
   - initialize DB is in initDB
-  - user:DBuser ,password:DBpassword ,app :DBname
- for ex
+  - user:DBuser ,password:DBpassword ,app :DBname\
+  for ex
  
 ```shell
   ./initDB/init.sh 127.0.0.1 3307 user password app
 ```
 
 ## start app  
+### start one by one
+- move to start folder
+- change environment variable for each service
+- then start
 
 ```shell
-rails s
+cd start
+./MCQ_server.sh
+./scoring_service.sh
+```
+
+### start docker
+- [installDocker](https://docs.docker.com/engine/install/)
+```shell
+cd start
+./docker_init.sh
 ```
