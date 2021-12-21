@@ -9,8 +9,8 @@
 ### Clone the repository
 
 ```shell
-git clone https://github.com/alaahayba/zyda.git
-cd zyda
+git clone https://github.com/alaahayba/MCQ_test_engine.git
+cd MCQ_test_engine
 
 ```
 
