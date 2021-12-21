@@ -14,6 +14,19 @@ cd MCQ_test_engine
 
 ```
 
+### start docker
+- [installDocker](https://docs.docker.com/engine/install/)
+```shell
+cd start
+./docker_init.sh
+```
+at another terminal
+
+```
+ cd initDB
+ ./start.sh 
+```
+
 ### Check your Ruby version
 
 ```shell
@@ -68,17 +81,4 @@ bundle && yarn
 cd start
 ./MCQ_server.sh
 ./scoring_service.sh
-```
-
-### start docker
-- [installDocker](https://docs.docker.com/engine/install/)
-```shell
-cd start
-./docker_init.sh
-```
-at another terminal
-
-```
- cd initDB
- ./start.sh 
 ```
