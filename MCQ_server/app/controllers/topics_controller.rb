@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :topics_exam_params, only: [:topic_create, :topic_edit]
+  before_action :authorization
 
   def all
     @topics_exams = TopicsExam.all
@@ -57,10 +58,12 @@ class TopicsController < ApplicationController
     puts params
     params.require(:topics_exam).permit(:topic_name, :questions, :answers)
     params.require(:topics_exam).permit(:answers)
-    # params[:topics_exam][:answers].to_h
     params[:topics_exam][:answers].permit!
+  end
 
-    # ActionController::Parameters.permit_all_parameters = true
-
+  def authorization
+    if (!helpers.auth_token)
+      render json: { status: 300, message: "Unauthorized access in the API" }, status: 401
+    end
   end
 end

@@ -1,7 +1,12 @@
 class StudentController < ApplicationController
   before_action :validate_enroll_body, only: [:enroll]
-  before_action :filter_params, only: [:get_scores]
   before_action :validate_submit_body, only: [:submit]
+  before_action :filter_params, only: [:get_scores]
+  before_action :authorization, only: [:hello, :student_average, :get_scores]
+
+  def hello
+    render json: { status: "welcome" }
+  end
 
   def enroll
     ## TODO save user data
@@ -147,5 +152,11 @@ class StudentController < ApplicationController
   def filter_params
     params.require(:topic_name)
     params.require(:phone)
+  end
+
+  def authorization
+    if (!helpers.auth_token)
+      render json: { status: 300, message: "Unauthorized access in the API" }, status: 401
+    end
   end
 end

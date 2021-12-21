@@ -1,4 +1,13 @@
 module ApplicationHelper
+
+  def auth_token
+    reqToken = request.headers["token"]
+    if (reqToken != "MCQ_admin")
+      return false
+    end
+    return true
+  end
+
   def get_topic(topic_name)
     @topics_exam = TopicsExam
       .where("topic_name": topic_name)
